@@ -21,16 +21,41 @@ router = APIRouter()
 
 
 @router.post("/")
-def criar(
-    usuario: Usuario,
-    db: Session = Depends(get_db)
-):
+def criar_usuario(usuario, db):
 
-    return criar_usuario(
-        usuario,
-        db
+    usuario_existente = db.query(
+        UsuarioModel
+    ).filter(
+        UsuarioModel.username == usuario.username
+    ).first()
+
+    if usuario_existente:
+
+        raise HTTPException(
+            status_code=400,
+            detail="Essa conta já existe"
+        )
+
+    senha_hash = bcrypt.hashpw(
+        usuario.senha.encode("utf-8"),
+        bcrypt.gensalt()
+    ).decode("utf-8")
+
+    novo_usuario = UsuarioModel(
+        username=usuario.username,
+        senha=senha_hash,
+        role=usuario.role
     )
 
+    db.add(novo_usuario)
+
+    db.commit()
+
+    db.refresh(novo_usuario)
+
+    return {
+        "mensagem": "Usuário criado com sucesso"
+    }
 @router.post("/login")
 def login(
     login: Login,
