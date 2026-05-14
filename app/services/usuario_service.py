@@ -16,6 +16,12 @@ from app.auth.jwt_handler import criar_token
 
 
 def criar_usuario(usuario, db):
+    db.add(novo_usuario)
+    db.commit()
+    db.refresh(novo_usuario)
+    return {
+        "mensagem": "Usuário criado com sucesso"
+    }
 
     usuario_existente = db.query(
         UsuarioModel
@@ -60,16 +66,6 @@ def criar_usuario(usuario, db):
 
     }
   
-
-    db.add(novo_usuario)
-
-    db.commit()
-
-    db.refresh(novo_usuario)
-
-    return {
-        "mensagem": "Usuário criado com sucesso"
-    }
 
 
 def login_usuario(
