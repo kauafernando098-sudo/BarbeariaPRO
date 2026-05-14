@@ -63,10 +63,10 @@ def criar_usuario(usuario, db):
             detail="Usuário não encontrado"
         )
     
-    if not senha_valida:
+    if len(usuario.senha) < 6:
         raise HTTPException(
-            status_code=401,
-            detail="Senha incorreta"
-         )
+            status_code=400,
+            detail="A senha deve conter pelo menos 6 caracteres"
+        )
 
-    # resto do código
+  
