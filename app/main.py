@@ -8,7 +8,7 @@ from app.database.connection import engine
 from app.routes.agendamentos import router as agendamentos_router
 from app.routes.usuarios import router as usuarios_router
 
-
+print("CORS ATIVO")
 app = FastAPI()
 
 
