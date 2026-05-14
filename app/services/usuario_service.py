@@ -15,10 +15,7 @@ from app.models.login import Login
 from app.auth.jwt_handler import criar_token
 
 
-def criar_usuario(
-    usuario: Usuario,
-    db: Session
-):
+def criar_usuario(usuario, db):
 
     usuario_existente = db.query(
         UsuarioModel
@@ -34,15 +31,35 @@ def criar_usuario(
         )
 
     senha_hash = bcrypt.hashpw(
+
         usuario.senha.encode("utf-8"),
+
         bcrypt.gensalt()
+
     ).decode("utf-8")
 
     novo_usuario = UsuarioModel(
-    username=usuario.username,
-    senha=senha_hash,
-    role="user"
-)
+
+        username=usuario.username,
+
+        senha=senha_hash,
+
+        role=usuario.role
+
+    )
+
+    db.add(novo_usuario)
+
+    db.commit()
+
+    db.refresh(novo_usuario)
+
+    return {
+
+        "mensagem": "Usuário criado com sucesso"
+
+    }
+  
 
     db.add(novo_usuario)
 
