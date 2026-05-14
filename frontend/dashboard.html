@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <link
+    rel="icon"
+    type="image/png"
+    href="./logo.png"
+>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="./css/style.css"
+    >
+
+</head>
+<link
+    rel="icon"
+    type="image/png"
+    href="./logo.png"
+>
+
+<body class="home-body">
+
+    <div class="overlay"></div>
+
+    <main class="hero">
+
+        <div class="hero-content">
+
+            <div class="topo-logo">
+
+                <img
+                    src="./logo.png"
+                    class="hero-logo"
+                    alt="Logo"
+                >
+
+                <span class="tag">
+
+                    Painel de Agendamentos
+
+                </span>
+
+            </div>
+
+            <h1>
+
+                Dashboard
+
+            </h1>
+
+            <p class="descricao">
+
+                Gerencie horários e clientes
+                da sua barbearia.
+
+            </p>
+
+            <input
+                type="text"
+                id="cliente"
+                placeholder="Cliente"
+            >
+
+            <input
+                type="time"
+                id="horario"
+            >
+
+            <input
+                type="text"
+                id="barbeiro"
+                placeholder="Barbeiro"
+            >
+
+            <button
+                class="primary-btn"
+                onclick="criarAgendamento()"
+            >
+
+                Criar Agendamento
+
+            </button>
+
+            <button
+                class="secondary-btn"
+                onclick="listarAgendamentos()"
+            >
+
+                Atualizar Lista
+
+            </button>
+
+            <div id="lista"></div>
+
+        </div>
+
+    </main>
+
+    <script src="./js/dashboard.js"></script>
+
+</body>
+
+</html>
