@@ -10,12 +10,10 @@ from app.services.usuario_service import (
     criar_usuario,
     login_usuario
 )
-
 router = APIRouter(
     prefix="/usuarios",
     tags=["Usuários"]
 )
-
 
 @router.post("/")
 def criar(
