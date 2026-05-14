@@ -36,7 +36,7 @@ async function listarAgendamentos() {
     const token = localStorage.getItem("token")
 
     const resposta = await fetch(
-        "http://127.0.0.1:8000/agendamentos/",
+        "https://barbeariapro.onrender.com",
         {
             headers: {
                 "Authorization": `Bearer ${token}`

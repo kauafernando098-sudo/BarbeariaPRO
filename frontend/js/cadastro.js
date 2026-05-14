@@ -4,7 +4,7 @@ async function cadastrar() {
     const senha = document.getElementById("senha").value
 
     const resposta = await fetch(
-        "http://127.0.0.1:8000/usuarios/",
+        "https://barbeariapro.onrender.com/usuarios/",
         {
             method: "POST",
 
