@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database.base import Base
 from app.database.connection import engine
+from app.routes import usuarios
+from app.routes import agendamentos
 
 from app.routes.agendamentos import router as agendamentos_router
 from app.routes.usuarios import router as usuarios_router
@@ -11,6 +13,13 @@ from app.models.usuario_model import UsuarioModel
 
 
 app = FastAPI()
+app.include_router(
+    usuarios.router
+)
+
+app.include_router(
+    agendamentos.router
+)
 app.add_middleware(
     CORSMiddleware,
 
