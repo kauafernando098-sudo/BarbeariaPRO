@@ -13,16 +13,29 @@ from app.models.agendamento_model import AgendamentoModel
 from app.models.usuario_model import UsuarioModel
 
 
+from fastapi import FastAPI
+
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
+
 app.add_middleware(
+
     CORSMiddleware,
+
     allow_origins=[
+
         "https://barbearia-pro-pi.vercel.app"
+
     ],
+
     allow_credentials=True,
+
     allow_methods=["*"],
+
     allow_headers=["*"],
 )
+
 app.include_router(
     usuarios.router
 )
