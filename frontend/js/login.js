@@ -4,7 +4,7 @@ async function login() {
     const senha = document.getElementById("senha").value
 
     const resposta = await fetch(
-        "https://barbeariapro.onrender.com/login",
+        "https://barbeariapro.onrender.com/usuarios/login",
         {
             method: "POST",
             headers: {
