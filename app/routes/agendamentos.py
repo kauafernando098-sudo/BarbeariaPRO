@@ -55,7 +55,6 @@ async def listar(
 async def criar(
     agendamento: Agendamento,
     request: Request,
-    api_key: str = Depends(validar_api_key),
     db: Session = Depends(get_db)
 ):
 
