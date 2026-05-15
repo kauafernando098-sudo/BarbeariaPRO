@@ -46,4 +46,7 @@ async function cadastrar() {
         "mensagem"
     ).innerText =
     dados.mensagem || dados.detail
+    if (dados.mensagem){
+        window.location.href = "https://barbearia-pro-pi.vercel.app/"
+    }
 }

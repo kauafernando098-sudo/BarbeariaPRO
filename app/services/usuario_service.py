@@ -6,6 +6,56 @@ from app.models.usuario_model import UsuarioModel
 import bcrypt
 
 
+from app.auth.jwt_handler import criar_token
+
+
+def login_usuario(login, db: Session):
+
+    usuario = db.query(
+        UsuarioModel
+    ).filter(
+        UsuarioModel.username == login.username
+    ).first()
+
+    if not usuario:
+
+        raise HTTPException(
+            status_code=401,
+            detail="Usuário não encontrado"
+        )
+
+    senha_correta = bcrypt.checkpw(
+        login.senha.encode("utf-8"),
+        usuario.senha.encode("utf-8")
+    )
+
+    if not senha_correta:
+
+        raise HTTPException(
+            status_code=401,
+            detail="Senha incorreta"
+        )
+
+    token = criar_token({
+
+        "sub": usuario.username,
+
+        "role": usuario.role
+
+    })
+
+    return {
+
+        "access_token": token,
+
+        "token_type": "bearer"
+
+    }
+
+
+
+
+
 def criar_usuario(usuario, db: Session):
 
     usuario_existente = db.query(
@@ -43,33 +93,3 @@ def criar_usuario(usuario, db: Session):
     }
 
 
-def login_usuario(login, db: Session):
-
-    usuario = db.query(
-        UsuarioModel
-    ).filter(
-        UsuarioModel.username == login.username
-    ).first()
-
-    if not usuario:
-
-        raise HTTPException(
-            status_code=401,
-            detail="Usuário não encontrado"
-        )
-
-    senha_correta = bcrypt.checkpw(
-        login.senha.encode("utf-8"),
-        usuario.senha.encode("utf-8")
-    )
-
-    if not senha_correta:
-
-        raise HTTPException(
-            status_code=401,
-            detail="Senha incorreta"
-        )
-
-    return {
-        "mensagem": "Login realizado com sucesso"
-    }
